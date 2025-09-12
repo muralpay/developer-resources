@@ -38,34 +38,44 @@ This comprehensive document contains all documentation from the Mural Pay API de
 29. [Errors](#errors)
 30. [Fiat Rail Codes](#fiat-rail-codes)
 31. [Sandbox Environment](#sandbox-environment)
+32. [AI Developer Resources](#ai-developer-resources)
+33. [Developer Fees](#developer-fees)
+34. [Mural Webhooks](#mural-webhooks)
 
 ### API Reference
-32. [Create an Account](#create-an-account-api)
-33. [Get an Account](#get-an-account-api)
-34. [Get all Accounts](#get-all-accounts-api)
-35. [Initiate End-User Custodial Challenge](#initiate-end-user-custodial-challenge-api)
-36. [Create an Organization](#create-an-organization-api)
-37. [Get an Organization](#get-an-organization-api)
-38. [Get Organization KYC Link](#get-organization-kyc-link-api)
-39. [Search Organizations](#search-organizations-api)
-40. [Get Organization TOS Link](#get-organization-tos-link-api)
-41. [Cancel a Payin](#cancel-a-payin-api)
-42. [Create a Payin](#create-a-payin-api)
-43. [Get a Payin](#get-a-payin-api)
-44. [Get Payin Exchange Rate](#get-payin-exchange-rate-api)
-45. [Search Payins](#search-payins-api)
-46. [Cancel a Payout Request](#cancel-a-payout-request-api)
-47. [Create a Payout Request](#create-a-payout-request-api)
-48. [Execute End-User Custodial Payout Request](#execute-end-user-custodial-payout-request-api)
-49. [Execute a Payout Request](#execute-a-payout-request-api)
-50. [Get Bank Details](#get-bank-details-api)
-51. [Get Fees for Fiat Amount](#get-fees-for-fiat-amount-api)
-52. [Get Fees for Token Amount](#get-fees-for-token-amount-api)
-53. [Get a Payout Request](#get-a-payout-request-api)
-54. [Get Payout Request Payload](#get-payout-request-payload-api)
-55. [Search Payout Requests](#search-payout-requests-api)
-56. [Search Transactions](#search-transactions-api)
-57. [Get Supported Countries](#get-supported-countries-api)
+35. [Create an Account](#create-an-account-api)
+36. [Get an Account](#get-an-account-api)
+37. [Get all Accounts](#get-all-accounts-api)
+38. [Initiate End-User Custodial Challenge](#initiate-end-user-custodial-challenge-api)
+39. [Create an Organization](#create-an-organization-api)
+40. [Get an Organization](#get-an-organization-api)
+41. [Get Organization KYC Link](#get-organization-kyc-link-api)
+42. [Search Organizations](#search-organizations-api)
+43. [Get Organization TOS Link](#get-organization-tos-link-api)
+44. [Cancel a Payin](#cancel-a-payin-api)
+45. [Create a Payin](#create-a-payin-api)
+46. [Get a Payin](#get-a-payin-api)
+47. [Get Payin Exchange Rate](#get-payin-exchange-rate-api)
+48. [Search Payins](#search-payins-api)
+49. [Cancel a Payout Request](#cancel-a-payout-request-api)
+50. [Create a Payout Request](#create-a-payout-request-api)
+51. [Execute End-User Custodial Payout Request](#execute-end-user-custodial-payout-request-api)
+52. [Execute a Payout Request](#execute-a-payout-request-api)
+53. [Get Bank Details](#get-bank-details-api)
+54. [Get Fees for Fiat Amount](#get-fees-for-fiat-amount-api)
+55. [Get Fees for Token Amount](#get-fees-for-token-amount-api)
+56. [Get a Payout Request](#get-a-payout-request-api)
+57. [Get Payout Request Payload](#get-payout-request-payload-api)
+58. [Search Payout Requests](#search-payout-requests-api)
+59. [Search Transactions](#search-transactions-api)
+60. [Get Supported Countries](#get-supported-countries-api)
+61. [Create Webhook](#create-webhook-api)
+62. [Get Webhook](#get-webhook-api)
+63. [List Webhooks](#list-webhooks-api)
+64. [Update Webhook](#update-webhook-api)
+65. [Update Webhook Status](#update-webhook-status-api)
+66. [Delete Webhook](#delete-webhook-api)
+67. [Send Webhook Event](#send-webhook-event-api)
 
 ---
 
@@ -940,6 +950,100 @@ Two methods to add test funds:
 2. Use a Testnet Faucet to deposit USDC via associated wallet address
 
 For additional funds or organization creation, contact [support@muralpay.com].
+
+### AI Developer Resources
+
+The AI Developer Resources page provides miscellaneous resources to assist with development while using Large Language Models (LLMs).
+
+Available Resources:
+
+1. **OpenAPI Specification File**
+   - Downloadable from: https://developers.muralpay.com/openapi/open-api-spec.json
+   - Recommended for developers to "copy and paste into their AI Agent's context"
+
+2. **Documentation Markdown**
+   - Complete documentation corpus available as raw markdown
+   - Hosted on GitHub: https://raw.githubusercontent.com/muralpay/developer-resources/refs/heads/main/mural-api-documentation-complete.md
+
+3. **LLMs.txt File**
+   - Downloadable from: https://developers.muralpay.com/llms.txt
+
+4. **MCP Server**
+   - Noted as "Coming soon..."
+
+**Key Purpose:** The resources are designed to provide comprehensive reference materials for AI developers working with the Mural Pay API, offering multiple formats for integration and context-building in AI agent development.
+
+### Developer Fees
+
+Mural allows developers to collect custom per-payout recipient fees that are automatically withheld from the customer's payout request amount.
+
+#### Fee Structure Example:
+- Mural platform exchange fee: 0.4%
+- Custom developer fee: 0.5%
+- Total variable fee: 0.9%
+
+#### Usage Details:
+- Developers set a percentage fee when creating a payout request
+- Users pay both the custom fee and Mural's platform fees
+- Fees are settled and paid out monthly on an agreed date
+
+#### Important Note:
+> "Please contact support before using this feature, this feature needs to be enabled before you can use it."
+
+#### Implementation Example:
+In the payout request, developers can specify a `developerFeePercentage` (e.g., 0.5%) which will be collected on top of Mural's platform fee.
+
+#### Practical Scenario:
+For a 10,000 USDC payout:
+- Total fees: 90 USDC (0.9%)
+- Recipient receives: 9,910 USDC
+- Developer receives: 50 USDC credited to their Mural Account
+
+**Recommendation:** Contact Mural's support team to enable and arrange fee collection details.
+
+### Mural Webhooks
+
+Webhooks provide real-time notifications for payment operations, enabling instant updates on account balance changes.
+
+#### Webhook Configuration Process:
+
+1. **Create Webhook** (initially DISABLED status)
+2. **Enable Webhook** by updating status to ACTIVE
+3. **Implement endpoint** to receive webhook events
+4. **Implement signature validation** for security
+
+#### Supported Event Categories:
+
+- **`mural_account_balance_activity`**
+  - `account_credited`: Triggered when funds are received
+  - `account_debited`: Triggered when funds are sent
+
+#### Key Payload Details:
+Webhook payloads include transaction specifics such as:
+- Account ID
+- Organization ID
+- Token details
+- Blockchain information
+- Transaction hash
+
+#### Security Features:
+- **Cryptographic signature verification** for payload authenticity
+- **Security headers include:**
+  - `x-mural-signature`
+  - `x-mural-webhook-signature-version`
+  - `x-mural-webhook-timestamp`
+
+#### Delivery Guarantees:
+- Events delivered in occurrence order
+- Retry mechanism with exponential backoff
+- Retry attempts continue for up to 5 minutes
+
+#### Verification Process:
+1. Concatenate timestamp and request body
+2. Use provided public key to validate signature
+3. Implement timestamp checks to prevent replay attacks
+
+The documentation provides comprehensive TypeScript examples for webhook signature verification implementation.
 
 ---
 
@@ -1825,6 +1929,83 @@ Example Response:
 
 Server: https://api.muralpay.com
 
+### Create Webhook API
+
+This is an OpenAPI specification for creating webhooks through the Mural API.
+
+Key Details:
+- **Endpoint**: `/api/webhooks`
+- **Method**: POST
+- **Authentication**: Bearer token (JWT) required
+- **Description**: Creates a new webhook endpoint for receiving real-time notifications
+
+Request Parameters:
+- Webhook URL endpoint
+- Event types to subscribe to
+- Authentication configuration
+
+Response:
+- Webhook ID
+- Status (initially DISABLED)
+- Configuration details
+
+### Get Webhook API
+
+Retrieves details for a specific webhook by ID.
+
+Key Details:
+- **Endpoint**: `/api/webhooks/{webhookId}`
+- **Method**: GET
+- **Authentication**: Bearer token (JWT) required
+
+### List Webhooks API
+
+Retrieves all webhooks for the authenticated organization.
+
+Key Details:
+- **Endpoint**: `/api/webhooks`
+- **Method**: GET
+- **Authentication**: Bearer token (JWT) required
+
+### Update Webhook API
+
+Updates webhook configuration such as URL endpoint and event subscriptions.
+
+Key Details:
+- **Endpoint**: `/api/webhooks/{webhookId}`
+- **Method**: PATCH
+- **Authentication**: Bearer token (JWT) required
+
+### Update Webhook Status API
+
+Updates the status of a webhook (ACTIVE/DISABLED).
+
+Key Details:
+- **Endpoint**: `/api/webhooks/{webhookId}/status`
+- **Method**: PATCH
+- **Authentication**: Bearer token (JWT) required
+
+### Delete Webhook API
+
+Deletes a webhook. The webhook will stop receiving events but delivery history is preserved.
+
+Key Details:
+- **Endpoint**: `/api/webhooks/{webhookId}`
+- **Method**: DELETE
+- **Authentication**: Bearer token (JWT) required
+- **Description**: Stops webhook from receiving events while preserving delivery history
+
+### Send Webhook Event API
+
+Manually triggers a webhook event for testing purposes.
+
+Key Details:
+- **Endpoint**: `/api/webhooks/{webhookId}/send`
+- **Method**: POST
+- **Authentication**: Bearer token (JWT) required
+
+Server: https://api.muralpay.com
+
 ---
 
 ## Contact Information
@@ -1837,4 +2018,4 @@ API Base URLs:
 
 ---
 
-*This documentation was compiled from https://developers.muralpay.com/ on August 1, 2025.*
+*This documentation was compiled from https://developers.muralpay.com/ on August 1, 2025. Updated with new content on September 12, 2025.*
